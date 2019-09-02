@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+vector<int>arr,seg;
+#define ll long long int
+void recalculate(ll root)
+{
+	seg[root]=seg[root*2]+seg[root*2+1];
+	
+}
+void build(ll l,ll r,ll root=1)
+{
+	if(l==r)
+	{
+		seg[root]=arr[l];
+		return;
+	}
+	ll mid=(l+r)/2;
+	build(l,mid,root*2);
+	build(mid+1,r,root*2+1);
+	recalculate(root);
+}
+ll query(ll l,ll r,ll x,ll y,ll root=1)
+{
+	//complete overlap
+	if(x<=l and r<=y)
+	{
+		return seg[root];
+	}
+	if(y<l or r<x)
+	{
+		return 0;
+	}
+	ll mid=(l+r)/2;
+	ll sum=0;
+	sum+=query(l,mid,x,y,root*2);
+	sum+=query(mid+1,r,x,y,root*2+1);
+	return sum;
+}
+
+int main() {
+	// your code goes here
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	ll t;
+	cin>>t;
+	
+	
+	
+	while(t--)
+	{
+		ll n;
+		cin>>n;
+		arr.resize(n+1);
+		seg.resize(4*n);
+		for(ll i=1;i<=n;i++)
+	{
+		cin>>arr[i];
+	}
+	build(1,n);
+	ll q,x,y;
+	cin>>q;
+	while(q--)
+	{
+		cin>>x>>y;
+		ll ans=query(1,n,x,y);
+		cout<<ans<<"\n";	
+	}
+	seg.clear();
+	arr.clear();
+	}
+	
+	
+	return 0;
+}
