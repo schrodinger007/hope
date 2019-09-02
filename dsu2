@@ -1,0 +1,68 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<int> parent,len;
+	int find(int n)
+	{
+		if(parent[n]==n)
+		{
+			return n;
+		}
+		return parent[n]=find(parent[n]);
+		
+	}
+	void add(int a,int b)
+	{
+		int x=find(a);
+		int y=find(b);
+		if(x==y)
+		{
+			return;
+		}
+		if(len[x]<len[y])
+		{
+			swap(x,y);
+		}
+		parent[y]=x;
+		len[x]+=len[y];
+		
+	}
+	
+int main() {
+	// your code goes here
+	 int n,m;
+	//ll int u,v;
+	cin>>n>>m;
+	int mod=1e9+7;
+	
+set<int> st; 
+  
+	parent.resize(n+1);
+	len.resize(n+1);
+	for(int i=1;i<=n;i++)
+	{
+		
+		parent[i]=i;
+		len[i]=1;
+	}
+	for(int i=0;i<m;i++)
+	{
+		int x,y;
+		cin>>x>>y;
+		add(x,y);
+	}
+long long int sum=1;
+	for(int i=1;i<=n;i++)
+	{
+		int p=find(i);
+		st.insert(p);
+	}
+	for(auto i=st.begin();i!=st.end();i++)
+	{
+		sum=((sum%mod)*(len[*i]%mod))%mod;
+	}
+cout<<sum;
+	
+	return 0;
+}
