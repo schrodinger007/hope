@@ -1,0 +1,87 @@
+#include <bits/stdc++.h>
+#define ll long long int 
+
+using namespace std;
+
+vector<ll> parent,len,cur,cap;
+ll n;
+	 ll q,k;
+
+	ll find(ll n)
+	{
+		if(parent[n]==n)
+		{
+			return n;
+		}
+		return parent[n]=find(parent[n]);
+		
+	}
+	void add(ll p,ll x)
+	{
+		ll v=find(p);
+		while(x)
+		{
+	long long int rem=cap[v]-cur[v];
+		if(rem<x)
+		{
+			x-=rem;
+		cur[v]=cap[v];
+		parent[v]=find(v+1);
+		
+		}
+		else
+		{
+			cur[v]+=x;
+			x=0;
+			if(cur[v]==cap[v])
+			{
+				parent[v]=find(v+1);
+			}
+		}
+		v=find(v);
+		}
+	}
+	
+int main() {
+	// your code goes here
+	 
+	 
+	//ll int u,v;
+	//cin>>n;
+	ll x,p,k,y;
+	cin >> n;
+  
+	parent.resize(n+2);
+	cur.resize(n+2);
+	cap.resize(n+2);
+	//len.resize(n+1);
+	parent[n+1] = n +1;
+	cur[n+1] = 0;
+	cap[n+1] = std::numeric_limits<ll>::max();
+	
+	for(int i=1;i<=n;i++)
+	{
+		
+		parent[i]=i;
+		cur[i]=0;
+		cin>>cap[i];
+	}
+	cin>>q;
+	while(q--)
+	{
+		cin>>y;
+		
+		if(y==1)
+		{
+			cin>>p>>x;
+			add(p,x);
+			
+		}
+		if(y==2)
+		{
+			cin>>k;
+			cout<<cur[k] << endl;
+		} 
+	}
+	return 0;
+}
