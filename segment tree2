@@ -1,0 +1,96 @@
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+vector<ll>arr,seg;
+
+void recalculate(ll root)
+{
+	seg[root]=min(seg[root*2],seg[root*2+1]);
+	
+}
+void build(ll l,ll r,ll root=1)
+{
+	if(l==r)
+	{
+		seg[root]=arr[l];
+		return;
+	}
+	ll mid=(l+r)/2;
+	build(l,mid,root*2);
+	build(mid+1,r,root*2+1);
+	recalculate(root);
+}
+ll query(ll l,ll r,ll x,ll y,ll root=1)
+{
+	//complete overlap
+	if(x<=l and r<=y)
+	{
+		return seg[root];
+	}
+	if(y<l or r<x)
+	{
+		return INT_MAX;
+	}
+	ll mid=(l+r)/2;
+	ll sum=INT_MAX;
+	sum=min(sum,query(l,mid,x,y,root*2));
+	sum=min(sum,query(mid+1,r,x,y,root*2+1));
+	return sum;
+}
+void update(ll l,ll r,ll x,ll val,ll root=1)
+{
+	if(l==r)
+	{
+		seg[root]=val;
+		return;
+	}
+	ll mid=(l+r)/2;
+	if(x<=mid)
+	{
+		update(l,mid,x,val,root*2);
+	}
+	else{
+		update(mid+1,r,x,val,root*2+1);
+	}
+	recalculate(root);
+}
+
+
+int main() {
+	// your code goes here
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+
+
+		ll n,q;
+		cin>>n>>q;
+		arr.resize(n+1);
+		seg.resize(4*n);
+		for(ll i=1;i<=n;i++)
+	{
+		cin>>arr[i];
+	}
+	build(1,n);
+	ll x,y;
+
+	while(q--)
+	{
+		char type;
+		cin>>type;
+		cin>>x>>y;
+		if(type == 'q')
+		{
+			ll ans=query(1,n,x,y);
+			cout<<ans<<'\n';
+			
+		}
+		else 
+		{
+			update(1,n,x,y);
+		}
+	}
+
+	
+	
+	return 0;
+}
