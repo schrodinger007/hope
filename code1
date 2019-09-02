@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	char str[1000];
+	cin>>str;
+	int uc,lc=0;
+	for(int i=0;str[i]!='\0';i++)
+	{
+		if(isupper(str[i]))
+		{
+			uc++;
+			
+		}
+	else if(islower(str[i]))
+		{
+			lc++;
+			
+		}
+	}
+	if(uc>lc)
+	{
+	for(int i=0;str[i]!='\0';i++)
+	{
+		str[i]=toupper(str[i]);
+		cout<<str[i];
+	}
+	}
+	else if(uc<=lc)
+	{
+	for(int i=0;str[i]!='\0';i++)
+	{
+		str[i]=tolower(str[i]);
+		cout<<str[i];
+	}
+	}
+	
+	
+	return 0;
+}
