@@ -1,0 +1,120 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+vector<int>arr,seg,lazy;
+#define ll long long int
+void recalculate(ll root)
+{
+	seg[root]=seg[root*2]+seg[root*2+1];
+	
+}
+void propagate(ll l,ll r,ll root)
+{
+	seg[root]+=lazy[root]*(r-l+1);
+	if(l<r)
+	{
+		lazy[root*2]+=lazy[root];
+		lazy[root*2+1]+=lazy[root];
+	}
+	lazy[root]=0;
+}
+void update(ll l,ll r,ll x,ll y,ll val,ll root=1)
+{
+	if(lazy[root])
+	{
+		propagate(l,r,root);
+		
+	}
+	if(x<=l and r<=y)
+	{
+		lazy[root]+=val;
+		propagate(l,r,root);
+		return ;
+	}
+	if(y<l or r<x)
+	{
+		return ;
+	}
+	
+	ll mid=(l+r)/2;
+		update(l,mid,x,y,val,root*2);
+	
+		update(mid+1,r,x,y,val,root*2+1);
+	propagate(l,mid,root*2);
+	propagate(mid+l,r,root*2+1);
+	recalculate(root);
+}
+
+ll query(ll l,ll r,ll x,ll y,ll root=1)
+{
+	if(lazy[root])
+	{
+		propagate(l,r,root);
+		
+	}
+	if(x<=l and r<=y)
+	{
+		return seg[root];
+	}
+	if(y<l or r<x)
+	{
+		return 0;
+	}
+	
+	ll mid=(l+r)/2;
+	ll sum=0;
+	sum+=query(l,mid,x,y,root*2);
+	sum+=query(mid+1,r,x,y,root*2+1);
+	return sum;
+}
+
+int main() {
+	// your code goes here
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	ll t;
+	cin>>t;
+	
+	
+	
+	while(t--)
+	{
+		ll n;
+		cin>>n;
+		lazy.assign(4*n,0);
+		
+		seg.assign(4*n,0);
+		
+	//build(1,n);
+	ll q;
+	cin>>q;
+	while(q--)
+	{
+		int type;
+		cin>>type;
+		ll p,q,v;
+		
+		if(type == 0)
+		{
+			cin>>p>>q>>v;
+			update(1,n,p,q,v);
+			
+			
+			
+		}
+		else if(type==1)
+		{
+			cin>>p>>q;
+			ll ans=query(1,n,p,q);
+			cout<<ans<<'\n';
+			
+		}
+	}
+	seg.clear();
+	arr.clear();
+	}
+	
+	
+	return 0;
+}
+	
