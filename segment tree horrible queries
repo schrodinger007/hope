@@ -1,7 +1,7 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-vector<int>arr,seg,lazy;
+vector<ll>arr,seg,lazy;
 #define ll long long int
 void recalculate(ll root)
 {
@@ -28,7 +28,7 @@ void update(ll l,ll r,ll x,ll y,ll val,ll root=1)
 	if(x<=l and r<=y)
 	{
 		lazy[root]+=val;
-		propagate(l,r,root);
+		propagate(1,r,root);
 		return ;
 	}
 	if(y<l or r<x)
