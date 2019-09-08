@@ -1,0 +1,108 @@
+#include <bits/stdc++.h>
+#define ll long long int
+using namespace std;
+//vector<ll>seg;
+ll even[400001], odd[400001];
+ll arr[100001];
+ 
+void build(ll l,ll r,ll root=1)
+{
+	if(l==r)
+	{
+		if(arr[l]%2==0){
+			odd[root]=0;
+			even[root]=1;
+		}
+		else
+		{
+			odd[root]=1;
+			even[root]=0;
+ 
+		}
+		return;
+	}
+	ll mid=(l+r)/2;
+	build(l,mid,root*2);
+	build(mid+1,r,root*2+1);
+	even[root] = even[2*root] + even[2*root+1];
+	odd[root] = odd[2*root] + odd[2*root+1];
+}
+ll query(ll l,ll r,ll x,ll y,ll parity,ll root=1)
+{
+	//complete overlap
+	//if(x<=l and r<=y)
+	if ((x>= l) && (y<= r))
+	{
+		if (parity == 1) {
+			return even[root];
+		} else {
+			return odd[root];
+		}
+	}
+	if(y<l or r<x)
+	{
+		return 0;
+	}
+	ll mid=(l+r)/2;
+ 
+ 
+	ll p1 = query(l, r,x,y,parity,2*root);
+	ll p2 = query(l,r,x,y,parity,2*root+1);
+ 
+	return (p1 + p2);
+ 
+ 
+}
+void update(ll l,ll r,ll x,ll val,ll root=1)
+{
+	if(l==r)
+	{
+		if (val %2!=0) {
+			odd[root] = 1;
+			even[root] = 0;
+		} else {
+			even[root] = 1;
+			odd[root] = 0;
+		}
+		arr[x]=val;
+		return;
+	}
+	ll mid=(l+r)/2;
+ 
+		update(l,mid,x,val,root*2);
+ 
+		update(mid+1,r,x,val,root*2+1);
+ 
+	even[root] = even[2*root] + even[2*root+1];
+	odd[root] = odd[2*root] + odd[2*root+1];
+ 
+}
+ 
+ 
+int main() {
+ 
+ 
+ll n, i, j, k, a, q, b, c;
+	cin >> n;
+ 
+ 
+ 
+	for (i = 1; i <= n; ++i) {
+		cin >> arr[i];
+	}
+ 
+	build( 1, n);
+ 
+	cin >> q;
+	while (q--) {
+		cin >> a >> i >> j;
+		if (a == 0) {
+			update(1, n, i, j);
+		} else {
+			cout << query(1, n, i, j, a) << endl;
+		}
+	}
+ 
+ 
+	return 0;
+}
