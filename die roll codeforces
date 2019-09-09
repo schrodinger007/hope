@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+int gcd(int a, int b) 
+{ 
+    if (b == 0) 
+        return a; 
+    return gcd(b, a % b);  
+      
+} 
+int main() {
+	// your code goes here
+	int x,y;
+	cin>>x>>y;
+	int g;
+	
+	if(x>=y)
+	{
+		g=x;
+	}
+	else{
+		g=y;
+	}
+	float n=6-g+1;
+	float d=6;
+	//float p=n/d;
+	
+	//cout<<p;
+   int gc=gcd(n, d); 
+   cout<<n/gc<<"/"<<d/gc;
+	
+	return 0;
+}
