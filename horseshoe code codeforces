@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long int
+ 
+int main() {
+	// your code goes here
+	ll n;
+	ll arr[4];
+	
+	int count=0;
+	int flag=0;
+	
+	for(ll i=0;i<4;i++)
+	{
+		cin>>arr[i];
+	}
+/*	for(ll i=0;i<3;i++)
+	{
+		if(arr[i]==arr[i+1])
+		{
+			flag++;
+		}
+		if(flag<=3)
+		cout<<flag;
+	}*/
+	for(ll i=0;i<4;i++)
+	{
+		for(ll j=i+1;j<4;j++)
+		{
+			if(arr[j]!=arr[j+1])
+			{
+			if(arr[i]==arr[j])
+		{
+			count++;
+		}	
+			}
+			
+		}
+	
+	}
+	cout<<count;
+	return 0;
+}
