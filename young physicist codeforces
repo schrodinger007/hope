@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long int
+ 
+int main() {
+	// your code goes here
+	ll n;
+	cin>>n;
+	ll a[3];
+	ll sum1,sum0,sum2;
+	sum0=sum1=sum2=0;
+	while(n--)
+	{
+		for(int i=0;i<3;i++)
+		{
+			cin>>a[i];
+			
+		}
+		
+			sum0=sum0+a[0];
+				sum1=sum1+a[1];
+					sum2=sum2+a[2];
+		
+		
+	}
+	if(sum0==0&&sum1==0&&sum2==0)
+	{
+		cout<<"YES";
+	}
+	else
+	cout<<"NO";
+	return 0;
+}
