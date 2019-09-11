@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int n,s;
+	cin>>n;
+	int c1[100000],c2[100000],c3[100000];
+	int count1,count2,count3;
+	count1=count2=count3=0;
+	int a[n];
+	int k1,k2,k3;
+	k1=k2=k3=0;
+	
+	for(int i=0;i<n;i++)
+	{
+		cin>>a[i];
+	}
+	for(int i=0;i<n;i++)
+	{
+		if(a[i]==1)
+		{
+			c1[k1++]=i;
+		count1++;
+		}
+		if(a[i]==2)
+		{
+			c2[k2++]=i;
+		count2++;
+		}
+		
+		if(a[i]==3)
+		{
+			c3[k3++]=i;
+		count3++;
+		}
+		if (count1 <= count2 && count1 <= count3) {
+        s= count1;
+
+      /* If b is smaller than a and c */
+    } else if (count2 <= count1 && count2 <= count3)  {
+       s= count2;
+
+    } else {
+      s=count3;
+
+     }
+     
+     
+	}
+
+	cout<<s<<endl;
+	for(int i=0;i<s;i++)
+	{
+		cout<<c1[i]+1<<' '<<c2[i]+1<<' '<<c3[i]+1<<endl;
+	}
+	
+	return 0;
+}
