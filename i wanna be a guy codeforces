@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int n;
+	cin>>n;
+	int p,q;
+	cin>>p;
+	int a1[p];
+	//set <int> s;  
+	set <int> s;
+	for(int i=0;i<p;i++)
+	{
+		cin>>a1[i];
+		s.insert(a1[i]);
+	}
+	cin>>q;
+	int a2[q];
+	for(int i=0;i<q;i++)
+	{
+		cin>>a2[i];
+		s.insert(a2[i]);
+	}
+//	set <int, greater <int> > :: iterator itr;
+	//for ( auto itr = s.begin(); itr != s.end(); ++itr) 
+    //{ 
+     //   cout << '\t' << *itr; 
+    //} 
+	int size=s.size();
+	//cout<<size;
+	if(size==n)
+	{
+		cout<<"I become the guy.";
+	}
+	else cout<<"Oh, my keyboard!";
+	
+	return 0;
+}
