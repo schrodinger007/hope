@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	char str[100000];
+	cin>>str;
+	int k=0;
+	char str2[1000];
+	for(int i=0;str[i]!='\0';)
+	{
+		if(str[i]=='W'&&str[i+1]=='U'&&str[i+2]=='B')
+		{
+			if(k!=0)
+			{
+				str2[k]=' ';
+				k++;
+			}
+			i=i+3;
+		}
+		else{
+		
+				str2[k]=str[i];
+				i++;
+				k++;
+				
+			
+		}
+		
+	}
+	cout<<str2;
+	return 0;
+}
