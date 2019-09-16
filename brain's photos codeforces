@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+	// your code goes here
+	int n,m;
+	cin>>n>>m;
+	char str[n][m];
+	int flag=0;
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<m;j++)
+		{
+		cin>>str[i][j];
+		if(str[i][j]=='C'||str[i][j]=='M'||str[i][j]=='Y')
+		{
+			
+			
+			flag=1;
+			cout<<"#Color";
+			return 0;
+			
+		}
+		else 
+		{
+			flag=0;
+			
+			
+		}
+		}
+	}
+	if(flag==0)
+	{
+		cout<<"#Black&White";
+	}
+	return 0;
+}
