@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long int
+
+int main() {
+	// your code goes here
+	ll n;
+	cin>>n;
+	if(n==0)
+	{
+		cout<<"1";
+	}
+	else{
+		int unit[]={8,4,2,6};
+		n=(n-1)%4;
+		cout<<unit[n];
+	}
+	return 0;
+}
