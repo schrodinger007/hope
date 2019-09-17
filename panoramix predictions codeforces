@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int n,m;
+	cin>>n>>m;
+	int flag=0;
+	int ans;
+	for(int i=n+1;i<50;i++)
+	{
+		for(int j=2;j<=i/2;j++)
+		{
+			if(i%j==0)
+			{
+				flag=1;
+				break;
+			}
+			else{
+				flag=0;
+				
+				
+			}
+		}
+		if(flag==0)
+		{
+			ans=i;
+			break;
+		}
+		
+	}
+	//cout<<ans;
+	
+	
+			if(m==ans)
+			{
+				cout<<"YES";
+				
+			}
+			else cout<<"NO";
+			
+		
+	return 0;
+}
