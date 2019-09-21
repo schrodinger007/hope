@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main() {
+	// your code goes here
+	int n,a;
+	int sum=0;
+	cin>>n>>a;
+	int t[n+1];
+	for(int i=1;i<=n;i++)
+	{
+		cin>>t[i];
+		sum+=t[i];
+	}
+	for(int i=1;i<a&&i<=n-a;i++)
+	{
+		if(t[a-i]+t[a+i]==1)
+		sum--;
+	}
+	cout<<sum;
+	return 0;
+}
