@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long int
+ 
+int main() {
+	// your code goes here
+	ll n,m;
+	ll countbox=0;
+	ll countm=0;
+	ll count=0;
+	
+	cin>>n>>m;
+	ll a[20][20];
+	for(ll i=0;i<m;i++)
+	{
+		cin>>a[i][0]>>a[i][1];
+		countbox+=a[i][0];
+		countm+=a[i][0]*a[i][1];
+		
+	}
+	if(countbox<n)
+	{
+		cout<<countm;
+		return 0;
+	}
+	while(n)
+	{
+		ll x=0;
+		for(ll i=0;i<m;i++)
+		{
+			if(a[x][1]<a[i][1])
+			{
+				x=i;
+			}
+		}
+		if(n<=a[x][0])
+		{
+			count+=n*a[x][1];
+			cout<<count;
+			return 0;
+		}
+		else{
+			count+=a[x][0]*a[x][1];
+			n=n-a[x][0];
+			a[x][1]=0;
+		}
+	}
+	
+	return 0;
+}
